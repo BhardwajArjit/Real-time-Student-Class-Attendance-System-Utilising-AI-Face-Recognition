@@ -6,9 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="1aac0cbb-fc91-4ceb-8f06-e92d69d1c5b3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/arjit.png" beforeDir="false" afterPath="$PROJECT_DIR$/arjit.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/attendance_excel.xls" beforeDir="false" afterPath="$PROJECT_DIR$/attendance_excel.xls" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/capture_image.py" beforeDir="false" afterPath="$PROJECT_DIR$/capture_image.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/face_recognition_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/face_recognition_code.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trial.py" beforeDir="false" afterPath="$PROJECT_DIR$/yolov5_model_trial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yolov5_model_trial.py" beforeDir="false" afterPath="$PROJECT_DIR$/yolov5_model_trial.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

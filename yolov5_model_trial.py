@@ -45,8 +45,8 @@ process_this_frame = True
 # Setting up the attendance excel file
 rb = xlrd.open_workbook('attendance_excel.xls', formatting_info=True)
 wb = xl_copy(rb)
-inp = input('Please give current subject lecture name ')
-sheet1 = wb.add_sheet(inp)
+subject_name = input('Please give current subject lecture name ')
+sheet1 = wb.add_sheet(subject_name)
 sheet1.write(0, 0, 'Name/Date')
 sheet1.write(0, 1, str(date.today()))
 row = 1
@@ -99,6 +99,7 @@ while True:
 
             face_names.append(name)
             if (already_attendance_taken != name) and (name != "Unknown"):
+                # Update the attendance of the student
                 sheet1.write(row, col, name)
                 col = col + 1
                 sheet1.write(row, col, "Present")

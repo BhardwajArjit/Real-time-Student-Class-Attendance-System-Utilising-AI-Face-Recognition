@@ -6,7 +6,7 @@ video_capture = cv.VideoCapture(cam_port)
 
 name = input('Enter your name ')
 
-while 1:
+while True:
     result, image = video_capture.read()
     cv.imshow(name, image)
     if cv.waitKey(0):
