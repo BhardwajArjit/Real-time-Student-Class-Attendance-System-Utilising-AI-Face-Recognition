@@ -6,6 +6,11 @@ import numpy as np
 import xlrd
 from xlutils.copy import copy as xl_copy
 
+# Load YOLOv5 model for face detection
+yolo_weights = "yolov5s.pt"
+yolo_config = "yolov5s.yaml"
+yolo_net = cv.dnn.readNet(yolo_weights, yolo_config)
+
 # Read current folder path
 CurrentFolder = os.getcwd()
 image = CurrentFolder + '\\arjit.png'
@@ -34,8 +39,6 @@ known_face_names = [
 ]
 
 # Initialize some variables
-face_locations = []
-face_encodings = []
 face_names = []
 process_this_frame = True
 
@@ -53,18 +56,38 @@ already_attendance_taken = ""
 while True:
     ret, frame = video_capture.read()
 
-    # Resize frame of video to 1/4 size for faster face recognition processing
+    # Resize frame of video to 1/4 size for faster processing
     small_frame = cv.resize(frame, (0, 0), fx=0.25, fy=0.25)
 
-    # Convert the image from BGR color (which OpenCV uses) to RGB color (which face_recognition uses)
-    rgb_small_frame = np.ascontiguousarray(small_frame[:, :, ::-1])
+    # Convert the image from BGR color (which OpenCV uses) to RGB color
+    rgb_small_frame = cv.cvtColor(small_frame, cv.COLOR_BGR2RGB)
 
     if process_this_frame:
-        # Find all the faces and face encodings in the current frame of video
-        face_locations = face_recognition.face_locations(rgb_small_frame)
-        face_encodings = face_recognition.face_encodings(rgb_small_frame, face_locations)
+        # Detect faces using YOLOv5
+        blob = cv.dnn.blobFromImage(rgb_small_frame, 1 / 255.0, (416, 416), swapRB=True, crop=False)
+        yolo_net.setInput(blob)
+        detections = yolo_net.forward()
 
+        face_locations = []
+        for detection in detections[0]:
+            confidence = detection[4]
+            if confidence > 0.5:
+                center_x = int(detection[0] * small_frame.shape[1])
+                center_y = int(detection[1] * small_frame.shape[0])
+                width = int(detection[2] * small_frame.shape[1])
+                height = int(detection[3] * small_frame.shape[0])
+
+                # Calculate face bounding box coordinates
+                left = max(center_x - width // 2, 0)
+                top = max(center_y - height // 2, 0)
+                right = min(center_x + width // 2, small_frame.shape[1])
+                bottom = min(center_y + height // 2, small_frame.shape[0])
+
+                face_locations.append((top, right, bottom, left))
+
+        face_encodings = [face_recognition.face_encodings(rgb_small_frame, [box])[0] for box in face_locations]
         face_names = []
+
         for face_encoding in face_encodings:
             # See if the face is a match for the known face(s)
             matches = face_recognition.compare_faces(known_face_encodings, face_encoding)
@@ -81,11 +104,11 @@ while True:
                 sheet1.write(row, col, "Present")
                 row = row + 1
                 col = 0
-                print("attendance taken")
+                print("Attendance taken for", name)
                 wb.save('attendance_excel.xls')
                 already_attendance_taken = name
             else:
-                print("next student")
+                print("Next student")
 
     process_this_frame = not process_this_frame
 
@@ -105,9 +128,9 @@ while True:
 
     cv.imshow("Video", frame)
 
-    # Hit 'q' on the keyboard to quit!
-    if cv.waitKey(1) & 0xff == ord('q'):
-        print("data save")
+    # Hit 'q' on the keyboard to quit
+    if cv.waitKey(1) & 0xFF == ord('q'):
+        print("Data saved")
         break
 
 # Release handle to the webcam
