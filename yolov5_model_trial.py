@@ -7,12 +7,12 @@ import xlrd
 from xlutils.copy import copy as xl_copy
 
 # Load YOLOv5 model for face detection
-yolo_weights = "yolov5s.pt"
-yolo_config = "yolov5s.yaml"
-yolo_net = cv.dnn.readNet(yolo_weights, yolo_config)
+CurrentFolder = os.getcwd()
+yolo_weights = CurrentFolder + '\\yolov5s.pt'
+yolo_config = CurrentFolder + '\\yolov5s.yaml'
+yolo_net = cv.dnn.readNet(yolo_weights, yolo_config, "Darknet")
 
 # Read current folder path
-CurrentFolder = os.getcwd()
 image = CurrentFolder + '\\arjit.png'
 image2 = CurrentFolder + '\\hemant.png'
 
@@ -42,7 +42,7 @@ known_face_names = [
 face_names = []
 process_this_frame = True
 
-# Setting up the attendance excel file
+# Setting up the attendance Excel file
 rb = xlrd.open_workbook('attendance_excel.xls', formatting_info=True)
 wb = xl_copy(rb)
 subject_name = input('Please give current subject lecture name ')
