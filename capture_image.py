@@ -4,14 +4,22 @@ import cv2 as cv
 cam_port = 0
 video_capture = cv.VideoCapture(cam_port)
 
-name = input('Enter your name ')
+name = input('Enter your name: ')
 
 while True:
     result, image = video_capture.read()
     cv.imshow(name, image)
-    if cv.waitKey(0):
+
+    # Hit 'q' to quit the window and save the image
+    if cv.waitKey(0) & 0xff == ord('q'):
         cv.imwrite(name + ".png", image)
         print("Image Taken")
+        break
 
-    else:
-        print("No image detected. Please try again!")
+    # Hit 'r' to retake the image
+    if 0xff == ord('r'):
+        pass
+
+
+video_capture.release()
+cv.destroyAllWindows()
