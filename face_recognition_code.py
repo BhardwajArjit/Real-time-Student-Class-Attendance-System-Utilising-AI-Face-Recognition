@@ -8,7 +8,7 @@ from xlutils.copy import copy as xl_copy
 
 # Read current folder path
 CurrentFolder = os.getcwd()
-image = CurrentFolder + '\\arjit.png'
+image1 = CurrentFolder + '\\arjit.png'
 image2 = CurrentFolder + '\\hemant.png'
 
 cam_port = 0
@@ -16,7 +16,7 @@ video_capture = cv.VideoCapture(cam_port)
 
 # Load a sample picture and learn how to recognize it.
 person1_name = "arjit"
-person1_image = face_recognition.load_image_file(image)
+person1_image = face_recognition.load_image_file(image1)
 person1_face_encoding = face_recognition.face_encodings(person1_image)[0]
 
 person2_name = "hemant"
@@ -39,10 +39,10 @@ face_encodings = []
 face_names = []
 process_this_frame = True
 
-# Setting up the attendance excel file
+# Setting up the attendance Excel file
 rb = xlrd.open_workbook('attendance_excel.xls', formatting_info=True)
 wb = xl_copy(rb)
-subject_name = input('Please give current subject lecture name ')
+subject_name = input('Please give current subject lecture name: ')
 sheet1 = wb.add_sheet(subject_name)
 sheet1.write(0, 0, 'Name/Date')
 sheet1.write(0, 1, str(date.today()))
