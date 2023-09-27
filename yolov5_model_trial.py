@@ -13,7 +13,7 @@ yolo_config = CurrentFolder + '\\yolov5s.yaml'
 yolo_net = cv.dnn.readNet(yolo_weights, yolo_config, "Darknet")
 
 # Read current folder path
-image = CurrentFolder + '\\arjit.png'
+image1 = CurrentFolder + '\\arjit.png'
 image2 = CurrentFolder + '\\hemant.png'
 
 cam_port = 0
@@ -21,7 +21,7 @@ video_capture = cv.VideoCapture(cam_port)
 
 # Load a sample picture and learn how to recognize it.
 person1_name = "arjit"
-person1_image = face_recognition.load_image_file(image)
+person1_image = face_recognition.load_image_file(image1)
 person1_face_encoding = face_recognition.face_encodings(person1_image)[0]
 
 person2_name = "hemant"
