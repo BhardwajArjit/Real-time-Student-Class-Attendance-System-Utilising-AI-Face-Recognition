@@ -24,6 +24,8 @@ To use this attendance system, follow these steps:
 
 2. **Capture Student Images**:
    - Run `capture_image.py` to capture student images. Enter the student's name when prompted. Images will be saved in the current folder.
+   - Hit 'r' on the keyboard to retake the image.
+   - Hit 'q' on the keyboard to quit the window and save the image to the current directory.
 
 3. **Recognition and Attendance**:
    - Run `face_recognition_code.py` to perform facial recognition and update attendance in the Excel file.
