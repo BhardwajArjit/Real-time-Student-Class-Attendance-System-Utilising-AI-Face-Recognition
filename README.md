@@ -31,7 +31,7 @@ To use this attendance system, follow these steps:
    - Run `face_recognition_code.py` to perform facial recognition and update attendance in the Excel file.
    - The facial recognition process will use the highly accurate face_recognition library.
    - Make sure the camera is set up to capture students' faces as described in the project description.
-   - Hit 'q' on keyboard to quit.
+   - Hit 'q' on keyboard to quit the window. 
 
 ## Project Structure
 
@@ -44,7 +44,7 @@ To use this attendance system, follow these steps:
 
 This project relies on the following Python libraries:
 
-- face_recognition
+- face_recognition (requires visual studio c++ compiler, cmake and dlib to be pre-installed)
 - OpenCV
 - numpy
 - xlrd
