@@ -51,7 +51,6 @@ This project relies on the following Python libraries:
 
 Please refer to `requirements.txt` for the exact versions.
 
-## Author
+## License
 
-- Arjit Bhardwaj
-- iamarjitbhardwaj@gmail.com
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
